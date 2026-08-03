@@ -1,0 +1,30 @@
+class Encoder(nn.Module):
+    def __init__(self, d_model, max_window, num_heads, num_layers, num_vars, dropout):
+        super(Encoder, self).__init__()
+
+        self.encoder_layer = nn.TransformerEncoderLayer(
+                d_model=d_model,
+                nhead=num_heads,
+                dim_feedforward=256,
+                batch_first=True,
+                #norm_first=True,
+                dropout=dropout)
+
+        self.encoder = nn.TransformerEncoder(
+                encoder_layer=self.encoder_layer,
+                num_layers=num_layers)
+
+        self.input_embedding = InputEmbedding(
+                d_model=d_model,
+                max_window=max_window,
+                num_vars=num_vars,
+                dropout=dropout)
+
+        self.output_head = nn.Linear(d_model, 1)
+
+    def forward(self, x):
+        x = self.input_embedding(x)
+        attention_mask = nn.Transformer.generate_square_subsequent_mask(x.size(1))
+        x = self.encoder(x, mask=attention_mask, is_causal=True)
+        x = self.output_head(x)
+        return x
