@@ -1,0 +1,21 @@
+def find_end_date(reference, start_date, window:int):
+    end_date = pd.to_datetime(start_date) + pd.to_timedelta(window, unit='D')
+    while not test_windows(retrieve_series(reference, start_date, end_date), window, verbose=False):
+        end_date += pd.Timedelta(days=1)
+    return str(end_date.strftime('%Y-%m-%d'))
+
+
+def test_windows(df, window, verbose=True):
+    if not verbose:
+        if len(df) != window:
+            return False
+        else:
+            return True
+
+
+    if len(df) != window:
+        print(f"Required window is {window} days. Your history has {len(df)} days.")
+        return False
+    else:
+        print(f"Both history and window have {window} days.")
+        return True
