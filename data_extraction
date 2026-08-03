@@ -1,0 +1,42 @@
+def retrieve_series(series, start_date, end_date, target=False):
+
+    variable, ticker = series.split('/')
+    df = yf.Ticker(ticker).history(start=start_date, end=end_date)
+
+    if df.index.dtype=='datetime64[s, Asia/Seoul]':
+        s = df['Open']
+    else:
+        s = df['Close']
+
+    if target:
+        s = s.rename('target')
+    else:
+        s = s.rename(variable)
+
+    s.index = s.index.date
+    return s
+
+
+      
+def create_aligned_datasets(reference, variables, start_date, end_date):
+
+    reference = retrieve_series(reference, start_date, end_date, target=True)
+    df = pd.DataFrame(reference)
+
+    for var in variables:
+        df = df.join(retrieve_series(var, start_date, end_date), how='left')
+
+    df = df.ffill()
+    features = df.columns[1:]
+    df[features] = df[features].shift(1)
+    return df
+
+
+
+def preprocess(reference, variables, start_date, end_date):
+
+    df = create_aligned_datasets(reference, variables, start_date, end_date)
+
+    df_log_return = np.log(df/df.shift(1))
+    final_df = df_log_return.dropna()
+    return final_df
