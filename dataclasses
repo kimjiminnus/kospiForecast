@@ -1,0 +1,32 @@
+@dataclass
+class ModelConfigs:
+    #DEFAULT CONFIGS
+    d_model:int = 8
+    dim_ffn:int = 16
+    max_window:int = 10
+    num_heads:int = 2
+    num_layers:int = 3
+    num_vars:int = 3
+    dropout:float = 0.05
+
+@dataclass
+class InputData:
+    #DEFAULT EXAMPLES
+    reference:str = 'reference/^KS11'
+    var1:str = "krw/USDKRW=X"
+    var2:str = "dxy/DX-Y.NYB"
+    var3:str = "sox/^SOX"
+    variables = [var1, var2, var3]
+
+    start_date:str = "2025-06-01"
+    end_date:str = "2026-07-01"
+
+@dataclass
+class TrainingArguments:
+    #DEFAULT ARGS
+    epochs: int = 100
+    train_batch_size: int = 8
+    eval_batch_size: int = 8
+    learning_rate: float = 1e-3
+    criterion :nn.Module = nn.MSELoss()
+  
