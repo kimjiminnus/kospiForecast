@@ -1,0 +1,54 @@
+class Trainer:
+    def __init__(self, model_configs, df, train_args, optimiser):
+        self.model_configs = asdict(model_configs)
+        self.model = Encoder(**self.model_configs)
+        self.df = df
+        self.train_args = asdict(train_args)
+        self.optimiser = optimiser(self.model.parameters(), lr=self.train_args['learning_rate'])
+
+        train_loader, val_loader = split_datasets_and_dataloaders(
+                    df=self.df,
+                    window=self.model_configs['max_window'],
+                    train_batch_size=self.train_args['train_batch_size'],
+                    eval_batch_size=self.train_args['eval_batch_size'],
+                    return_datasets=False)
+        self.train_loader = train_loader
+        self.val_loader = val_loader
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "mps")
+
+        self.train_loss_list = []
+        self.val_loss_list = []
+
+
+    def train(self, plot_loss=False):
+        for epoch in range(self.train_args['epochs']):
+            loss = train_loop(self.model, self.train_loader, self.train_args['criterion'], self.optimiser, self.device)
+            self.train_loss_list.append(loss)
+
+        if plot_loss:
+            plot_losses(train_losses=self.train_loss_list, val_losses=None)
+
+        return self.train_loss_list
+
+
+    def evaluate(self, plot_loss=False):
+        loss = eval_loop(self.model, self.val_loader, self.train_args['criterion'], self.device)
+        self.val_loss_list.append(loss)
+
+        if plot_loss:
+            plot_losses(train_losses=None, val_losses=self.val_loss_list)
+        return self.val_loss_list
+
+
+    def train_evaluate(self, plot_loss=False):
+        model, ave_train_losses, ave_val_losses = train_and_evaluate(
+                           epochs=self.train_args['epochs'],
+                           model=self.model,
+                           train_loader=self.train_loader,
+                           val_loader=self.val_loader,
+                           criterion=self.train_args['criterion'],
+                           optimiser=self.optimiser,
+                           device=self.device,
+                           plot_loss=plot_loss
+                           )
+        return ave_train_losses, ave_val_losses
