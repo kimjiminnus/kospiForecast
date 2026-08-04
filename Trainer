@@ -1,5 +1,6 @@
 class Trainer:
     def __init__(self, model_configs, df, train_args, optimiser):
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "mps")
         self.model_configs = asdict(model_configs)
         self.model = Encoder(**self.model_configs)
         self.df = df
@@ -14,7 +15,6 @@ class Trainer:
                     return_datasets=False)
         self.train_loader = train_loader
         self.val_loader = val_loader
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "mps")
 
         self.train_loss_list = []
         self.val_loss_list = []
