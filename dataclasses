@@ -9,6 +9,17 @@ class ModelConfigs:
     num_vars:int = 3
     dropout:float = 0.05
 
+
+@dataclass
+class TrainingArguments:
+    #DEFAULT ARGS
+    epochs: int = 100
+    train_batch_size: int = 8
+    eval_batch_size: int = 8
+    learning_rate: float = 1e-3
+    criterion :nn.Module = nn.MSELoss()
+
+
 @dataclass
 class InputData:
     #DEFAULT EXAMPLES
@@ -20,13 +31,3 @@ class InputData:
 
     start_date:str = "2025-06-01"
     end_date:str = "2026-07-01"
-
-@dataclass
-class TrainingArguments:
-    #DEFAULT ARGS
-    epochs: int = 100
-    train_batch_size: int = 8
-    eval_batch_size: int = 8
-    learning_rate: float = 1e-3
-    criterion :nn.Module = nn.MSELoss()
-  
