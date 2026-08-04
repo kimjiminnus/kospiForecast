@@ -33,8 +33,6 @@ def eval_loop(model, val_loader, criterion, device):
 
 
 def train_and_evaluate(epochs, model, train_loader, val_loader, criterion, optimiser, device, plot_loss=True):
-    model = model.to(device)
-
     ave_train_losses = []
     ave_val_losses = []
 
