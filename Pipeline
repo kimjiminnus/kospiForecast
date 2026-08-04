@@ -1,0 +1,23 @@
+class Pipeline:
+    def __init__(self, task, df, plot_loss):
+        # DEFAULT CONFIGURATIONS
+        self.task = task
+        self.model_configs = ModelConfigs()
+        self.train_args = TrainingArguments()
+        self.input_data = df
+        self.optimiser = optim.Adam
+
+        self.trainer = Trainer(model_configs=self.model_configs,
+                               df=self.input_data,
+                               train_args=self.train_args,
+                               optimiser=self.optimiser)
+        self.plot_loss = plot_loss
+
+
+    def __call__(self):
+        if self.task == 'train':
+            self.trainer.train(self.plot_loss)
+        elif self.task == 'evaluate':
+            self.trainer.evaluate(self.plot_loss)
+        elif self.task == 'train_and_evaluate':
+            self.trainer.train_evaluate(self.plot_loss)
