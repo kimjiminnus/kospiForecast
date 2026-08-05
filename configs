@@ -1,5 +1,5 @@
 @dataclass
-class ModelConfigs:
+class ModelConfig:
     #DEFAULT CONFIGS
     d_model:int = 8
     dim_ffn:int = 16
@@ -31,6 +31,4 @@ class InputData:
     start_date:str = "2025-06-01"
     end_date:str = "2026-07-01"
 
-    @property
-    def variables(self):
-        return [self.var1, self.var2, self.var3]
+    inference:bool = False
