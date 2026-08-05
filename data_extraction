@@ -1,45 +1,59 @@
-def retrieve_series(series, start_date, end_date, target=False):
+class DataRetriever:
 
-    variable, ticker = series.split('/')
-    df = yf.Ticker(ticker).history(start=start_date, end=end_date)
+    def __init__(self, input_data:InputData):
 
-    if df.index.dtype=='datetime64[s, Asia/Seoul]':
-        s = df['Open']
-    else:
-        s = df['Close']
+        if not input_data.inference:
+            self.reference = input_data.reference
+            self.variables = [input_data.var1, input_data.var2, input_data.var3]
+        else:
 
-    if target:
-        s = s.rename('target')
-    else:
-        s = s.rename(variable)
+            self.reference=input_data.var1
+            self.variables = [input_data.var2, input_data.var3]
 
-    s.index = s.index.date
-    return s
+        self.start_date = input_data.start_date
+        self.end_date = input_data.end_date
 
 
-def create_aligned_datasets(reference, variables, start_date, end_date, inference=False):
+    def retrieve_series(self, index, start_date, end_date):
+        name, ticker = index.split('/')
+        df = yf.Ticker(ticker).history(start=start_date, end=end_date)
 
-    if inference:
-        reference = retrieve_series(reference, start_date, end_date, target=False)
-    else:
-        reference = retrieve_series(reference, start_date, end_date, target=True)
-    df = pd.DataFrame(reference)
+        if df.index.dtype=='datetime64[s, Asia/Seoul]':
+            s = df['Open']
+        else:
+            s = df['Close']
 
-    for var in variables:
-        df = df.join(retrieve_series(var, start_date, end_date), how='left')
-
-    df = df.ffill()
-    features = df.columns[1:]
-    df[features] = df[features].shift(1)
-
-    return df
+        s = s.rename(name)
+        s.index = s.index.date
+        return s
 
 
-def preprocess(reference, variables, start_date, end_date, inference=False):
+    def create_aligned_dataset(self):
 
-    df = create_aligned_datasets(reference, variables, start_date, end_date, inference=inference)
+        reference_series = self.retrieve_series(
+                                index=self.reference,
+                                start_date=self.start_date,
+                                end_date=self.end_date)
 
-    df_log_return = np.log(df/df.shift(1))
-    final_df = df_log_return.dropna()
+        df = pd.DataFrame(reference_series)
 
-    return final_df
+        for var in self.variables:
+            df = df.join(self.retrieve_series(
+                                    index=var,
+                                    start_date=self.start_date,
+                                    end_date=self.end_date),
+                                    how='left')
+
+        df = df.ffill()
+        features = df.columns[1:]
+        df[features] = df[features].shift(1)
+
+        return df
+
+
+    def log_return(self):
+        df = self.create_aligned_dataset()
+        df_log_return = np.log(df/df.shift(1))
+        final_df = df_log_return.dropna()
+
+        return final_df
