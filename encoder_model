@@ -1,26 +1,26 @@
 class Encoder(nn.Module):
-    def __init__(self, d_model, dim_ffn, max_window, num_heads, num_layers, num_vars, dropout):
+    def __init__(self, config:ModelConfig):
         super(Encoder, self).__init__()
 
         self.encoder_layer = nn.TransformerEncoderLayer(
-                d_model=d_model,
-                nhead=num_heads,
-                dim_feedforward=dim_ffn,
+                d_model=config.d_model,
+                dim_feedforward=config.dim_ffn,
+                nhead=config.num_heads,
                 batch_first=True,
                 #norm_first=True,
-                dropout=dropout)
+                dropout=config.dropout)
 
         self.encoder = nn.TransformerEncoder(
                 encoder_layer=self.encoder_layer,
-                num_layers=num_layers)
+                num_layers=config.num_layers)
 
         self.input_embedding = InputEmbedding(
-                d_model=d_model,
-                max_window=max_window,
-                num_vars=num_vars,
-                dropout=dropout)
+                d_model=config.d_model,
+                max_window=config.max_window,
+                num_vars=config.num_vars,
+                dropout=config.dropout)
 
-        self.output_head = nn.Linear(d_model, 1)
+        self.output_head = nn.Linear(config.d_model, 1)
 
     def forward(self, x):
         x = self.input_embedding(x)
