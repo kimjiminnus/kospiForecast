@@ -3,7 +3,7 @@ class DataRetriever:
     def __init__(self, input_data:InputData):
 
         if not input_data.inference:
-            self.reference = input_data.reference
+            self.reference = input_data.target
             self.variables = [input_data.var1, input_data.var2, input_data.var3]
         else:
 
