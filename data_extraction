@@ -21,7 +21,8 @@ def create_aligned_datasets(reference, variables, start_date, end_date, inferenc
 
     if inference:
         reference = retrieve_series(reference, start_date, end_date, target=False)
-    reference = retrieve_series(reference, start_date, end_date, target=True)
+    else:
+        reference = retrieve_series(reference, start_date, end_date, target=True)
     df = pd.DataFrame(reference)
 
     for var in variables:
