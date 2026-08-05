@@ -17,9 +17,10 @@ def retrieve_series(series, start_date, end_date, target=False):
     return s
 
 
-      
-def create_aligned_datasets(reference, variables, start_date, end_date):
+def create_aligned_datasets(reference, variables, start_date, end_date, inference=False):
 
+    if inference:
+        reference = retrieve_series(reference, start_date, end_date, target=False)
     reference = retrieve_series(reference, start_date, end_date, target=True)
     df = pd.DataFrame(reference)
 
@@ -29,14 +30,15 @@ def create_aligned_datasets(reference, variables, start_date, end_date):
     df = df.ffill()
     features = df.columns[1:]
     df[features] = df[features].shift(1)
+
     return df
 
 
+def preprocess(reference, variables, start_date, end_date, inference=False):
 
-def preprocess(reference, variables, start_date, end_date):
-
-    df = create_aligned_datasets(reference, variables, start_date, end_date)
+    df = create_aligned_datasets(reference, variables, start_date, end_date, inference=inference)
 
     df_log_return = np.log(df/df.shift(1))
     final_df = df_log_return.dropna()
+
     return final_df
