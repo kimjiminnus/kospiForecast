@@ -2,12 +2,12 @@ class Pipeline:
     def __init__(self, task, df, plot_loss):
         # DEFAULT CONFIGURATIONS
         self.task = task
-        self.model_configs = ModelConfigs()
+        self.model_config = ModelConfig()
         self.train_args = TrainingArguments()
         self.input_data = df
         self.optimiser = optim.Adam
 
-        self.trainer = Trainer(model_configs=self.model_configs,
+        self.trainer = Trainer(model_config=self.model_config,
                                df=self.input_data,
                                train_args=self.train_args,
                                optimiser=self.optimiser)
