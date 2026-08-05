@@ -1,15 +1,15 @@
 class Trainer:
-    def __init__(self, model_configs, df, train_args, optimiser):
+    def __init__(self, model_config, df, train_args, optimiser):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "mps")
-        self.model_configs = asdict(model_configs)
-        self.model = Encoder(**self.model_configs)
+        self.model_config = asdict(model_config)
+        self.model = Encoder(**self.model_config)
         self.df = df
         self.train_args = asdict(train_args)
         self.optimiser = optimiser(self.model.parameters(), lr=self.train_args['learning_rate'])
 
         train_loader, val_loader = split_datasets_and_dataloaders(
                     df=self.df,
-                    window=self.model_configs['max_window'],
+                    window=self.model_config['max_window'],
                     train_batch_size=self.train_args['train_batch_size'],
                     eval_batch_size=self.train_args['eval_batch_size'],
                     return_datasets=False)
