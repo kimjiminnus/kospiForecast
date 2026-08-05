@@ -12,7 +12,7 @@ def train_loop(model, train_loader, criterion, optimiser, device):
         loss.backward()
         nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         optimiser.step()
-    
+
         train_loss += loss.item()
     return train_loss/len(train_loader)
 
@@ -27,7 +27,6 @@ def eval_loop(model, val_loader, criterion, device):
 
             y_pred = model(x)
             loss = criterion(y_pred, y)
-
             val_loss += loss.item()
     return val_loss/len(val_loader)
 
