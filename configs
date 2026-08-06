@@ -1,9 +1,9 @@
 @dataclass
 class ModelConfig:
     #DEFAULT CONFIGS
-    d_model:int = 16
-    dim_ffn:int = 32
-    max_window:int = 10
+    d_model:int = 8
+    dim_ffn:int = 16
+    max_window:int = 5
     num_heads:int = 2
     num_layers:int = 3
     num_vars:int = 3
