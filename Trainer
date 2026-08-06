@@ -1,18 +1,12 @@
 class Trainer:
-    def __init__(self, df, model_config, train_args, optimiser, model=None):
-
+    def __init__(self, df, model, model_config, train_args, optimiser):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "mps")
+        self.model = model.to(self.device)
         self.config = model_config
         self.train_args = train_args
-
-        if model is None:
-            self.model = Encoder(model_config).to(self.device)
-        else:
-            self.model = model.to(self.device)
-
         self.optimiser = optimiser(params=self.model.parameters(),
-                            lr=train_args.learning_rate,
-                            weight_decay=train_args.weight_decay)
+                                   lr=train_args.learning_rate,
+                                   weight_decay=train_args.weight_decay)
 
         train_loader, val_loader = split_datasets_and_dataloaders(
                     df=df,
