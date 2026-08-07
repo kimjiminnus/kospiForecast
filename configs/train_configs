@@ -2,8 +2,8 @@
 class TrainingArguments:
     #DEFAULT ARGS
     epochs: int = 50
-    train_batch_size: int = 8
     max_window:int = 5
+    train_batch_size: int = 8
     eval_batch_size: int = 8
     learning_rate: float = 1e-2
     weight_decay: float = 1e-4
