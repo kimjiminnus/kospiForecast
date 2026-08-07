@@ -1,16 +1,9 @@
-def split_datasets_and_dataloaders(df, window, train_batch_size, eval_batch_size, return_datasets=False):
-    train_df, test_df = train_test_split(df, test_size=0.1, random_state=42, shuffle=False)
+def create_dataloaders(train_df, test_df, window, train_batch_size, eval_batch_size):
 
-    scaler = StandardScaler()
-    scaled_train_df = pd.DataFrame(scaler.fit_transform(train_df))
-    scaled_test_df = pd.DataFrame(scaler.transform(test_df))
-
-    train_dataset = TimeSeriesDataset(scaled_train_df, window)
-    val_dataset = TimeSeriesDataset(scaled_test_df, window)
+    train_dataset = TimeSeriesDataset(train_df, window)
+    val_dataset = TimeSeriesDataset(test_df, window)
 
     train_loader = DataLoader(train_dataset, batch_size=train_batch_size, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=eval_batch_size, shuffle=False)
 
-    if return_datasets:
-        return train_dataset, val_dataset, train_loader, val_loader
     return train_loader, val_loader
