@@ -1,3 +1,3 @@
-# Forecasting KOSPI-listed Indices
-Transformer Encoder with SARIMA inputs for forecasting the highly volatile KOSPI Index
+# Custom Transformers and LSTMs vs Google's TimesFM 2.5 for time-series analysis & forecasting
+
 
