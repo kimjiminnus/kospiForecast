@@ -6,7 +6,9 @@ class InputData:
     var2:str = "dxy/DX-Y.NYB"
     var3:str = "sox/^SOX"
 
-    start_date:str = "2025-06-01"
+    start_date:str = "2023-06-01"
     end_date:str = "2026-07-01"
+
+    test_split:float = 0.3
 
     inference:bool = False
