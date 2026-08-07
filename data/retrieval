@@ -1,12 +1,10 @@
 class DataRetriever:
-
     def __init__(self, input_data:InputData):
 
         if not input_data.inference:
             self.reference = input_data.target
             self.variables = [input_data.var1, input_data.var2, input_data.var3]
         else:
-
             self.reference=input_data.var1
             self.variables = [input_data.var2, input_data.var3]
 
@@ -14,9 +12,9 @@ class DataRetriever:
         self.end_date = input_data.end_date
 
 
-    def retrieve_series(self, index, start_date, end_date):
+    def retrieve(self, index):
         name, ticker = index.split('/')
-        df = yf.Ticker(ticker).history(start=start_date, end=end_date)
+        df = yf.Ticker(ticker).history(start=self.start_date, end=self.end_date)
 
         if df.index.dtype=='datetime64[s, Asia/Seoul]':
             s = df['Open']
@@ -28,32 +26,13 @@ class DataRetriever:
         return s
 
 
-    def create_aligned_dataset(self):
-
-        reference_series = self.retrieve_series(
-                                index=self.reference,
-                                start_date=self.start_date,
-                                end_date=self.end_date)
+    def retrieve_all(self):
+        reference_series = self.retrieve(self.reference)
+        variables_series = [self.retrieve(var) for var in self.variables]
 
         df = pd.DataFrame(reference_series)
 
-        for var in self.variables:
-            df = df.join(self.retrieve_series(
-                                    index=var,
-                                    start_date=self.start_date,
-                                    end_date=self.end_date),
-                                    how='left')
-
-        df = df.ffill()
-        features = df.columns[1:]
-        df[features] = df[features].shift(1)
+        for series in variables_series:
+            df = df.join(series, how='left')
 
         return df
-
-
-    def log_return(self):
-        df = self.create_aligned_dataset()
-        df_log_return = np.log(df/df.shift(1))
-        final_df = df_log_return.dropna()
-
-        return final_df
