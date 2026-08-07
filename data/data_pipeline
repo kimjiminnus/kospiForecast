@@ -1,0 +1,21 @@
+class DataPipeline:
+    def __init__(self, input_data:InputData):
+        self.preprocessor = DataPreprocessor(input_data)
+        self.test_split = input_data.test_split
+
+    def train_test_split(self, df):
+        train_df, test_df = train_test_split(df,
+                                             test_size=self.test_split,
+                                             random_state=42,
+                                             shuffle=False)
+        return train_df, test_df
+
+    def full_pipeline(self):
+        df = self.preprocessor.retrieve_data()
+        df = self.preprocessor.pre_split_preprocess(df)
+
+        train_df, test_df = self.train_test_split(df)
+
+        train_df, test_df = self.preprocessor.post_split_scaling(train_df, test_df)
+
+        return train_df, test_df
