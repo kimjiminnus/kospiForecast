@@ -1,0 +1,36 @@
+class DataPreprocessor:
+    def __init__(self, input_data:InputData):
+        self.retriever = DataRetriever(input_data)
+        self.scaler = StandardScaler()
+
+    def retrieve_data(self):
+        return self.retriever.retrieve_all()
+
+    def align_data(self, df):
+        df = df.ffill()
+        features = df.columns[1:]
+        df[features] = df[features].shift(1)
+        return df
+
+    def log_return_data(self, df):
+        df = np.log(df/df.shift(1))
+        return df.dropna()
+
+    def scale_data(self, df, fit=False):
+        if fit:
+            array = self.scaler.fit_transform(df)
+        else:
+            array = self.scaler.transform(df)
+
+        return pd.DataFrame(array, columns=df.columns, index=df.index)
+
+    def pre_split_preprocess(self, df):
+        aligned_df = self.align_data(df)
+        log_return_df = self.log_return_data(aligned_df)
+        return log_return_df
+
+    def post_split_scaling(self, train_df, test_df):
+        scaled_train_df = self.scale_data(train_df, fit=True)
+        scaled_test_df = self.scale_data(test_df, fit=False)
+
+        return scaled_train_df, scaled_test_df
