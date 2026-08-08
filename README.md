@@ -29,7 +29,7 @@ class ModelConfig:
     d_model:int = 8       # Feature Dimensions
     dim_ffn:int = 16      # Feed-forward network dimension
     max_window:int = 5    # Maximum sequence window
-    num_heads:int = 2     # For Multi-head Attention
+    num_heads:int = 2     # Number of attention heads
     num_layers:int = 3    # Number of Encoder Layers
     num_vars:int = 3      # Fixed due to high correlation of market indices
     dropout:float = 0.2   # Prevents overfitting on small dataset
