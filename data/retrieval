@@ -1,15 +1,15 @@
 class DataRetriever:
-    def __init__(self, input_data:InputData):
+    def __init__(self, data_params:DataParameters):
 
-        if not input_data.inference:
-            self.reference = input_data.target
-            self.variables = [input_data.var1, input_data.var2, input_data.var3]
+        if not data_params.inference:
+            self.reference = data_params.target
+            self.variables = [data_params.var1, data_params.var2, data_params.var3]
         else:
-            self.reference=input_data.var1
-            self.variables = [input_data.var2, input_data.var3]
+            self.reference=data_params.var1
+            self.variables = [data_params.var2, data_params.var3]
 
-        self.start_date = input_data.start_date
-        self.end_date = input_data.end_date
+        self.start_date = data_params.start_date
+        self.end_date = data_params.end_date
 
 
     def retrieve(self, index):
