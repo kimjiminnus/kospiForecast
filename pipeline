@@ -27,8 +27,8 @@ class Pipeline:
 
     def __call__(self):
         if self.task == 'train':
-            self.trainer.train(self.plot_loss)
+            return self.trainer.train(self.plot_loss)
         elif self.task == 'evaluate':
-            self.trainer.evaluate(self.plot_loss)
+            return self.trainer.evaluate(self.plot_loss)
         elif self.task == 'train_evaluate':
-            self.trainer.train_evaluate(self.plot_loss)
+            return self.trainer.train_evaluate(self.plot_loss)
