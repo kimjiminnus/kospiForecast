@@ -1,6 +1,7 @@
+#DEFAULT ARGS
+
 @dataclass
 class TrainingArguments:
-    #DEFAULT ARGS
     epochs: int = 50
     train_batch_size: int = 8
     eval_batch_size: int = 8
