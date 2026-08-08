@@ -47,7 +47,6 @@ data_pipeline = DataPipeline(
 
 # Return Dataloaders
 train_loader, val_loader = data_pipeline.run()       
-)
 ```
 
 ## Model Creation
