@@ -45,7 +45,7 @@ class HyperparamTuner:
         return val_loss[-1]
 
 
-def get_optimal_hyperparams(epochs:int, model_type:'str', data_params:DataParameters, optimiser, n_trials:int, plot_loss=False,):
+def get_optimal_hyperparams(epochs:int, model_type:str, data_params:DataParameters, optimiser, n_trials:int, plot_loss=False,):
     tuner = HyperparamTuner(epochs, model_type, data_params, optimiser, plot_loss)
     study = optuna.create_study(direction='minimize')
     study.optimize(tuner.objective, n_trials=n_trials)
