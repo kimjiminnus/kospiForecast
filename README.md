@@ -76,10 +76,10 @@ create_model("timesfm", model_config=None)
 
 ## Custom Transformer Encoder
 - Converts stock data into numerical feature embeddings.
+- Applies positional encoding to provide temporal information from previous trading days to the model.
 ```python
 # input_tensor.shape == (batch_size, max_window, num_vars)
 ```
-- Applies positional encoding to provide temporal information from previous trading days to the model.
 
 ## Google's TimesFM 2.5 Model
 This Decoder-only model is used strictly for zero-shot forecasting as a baseline model for comparison with the performance of a custom Transformer Encoder-only model
