@@ -100,6 +100,7 @@ trainer.train_evaluate(plot_loss=True)
 ```
 ## Pipeline Class
 - Pipeline covers instantiation of both DataPipeline & Trainer classes and combines the process.
+- Users can input pre-existing models for fine-tuning instead of string inputs
 ```python
 pipeline_object = Pipeline(
            task="train",
@@ -109,9 +110,7 @@ pipeline_object = Pipeline(
            optimiser=optim.SGD,
            plot_loss=True
            )
-```
-- Users can input pre-existing models for fine-tuning instead of string inputs
-```python
+
 # This line is all that's required to train or evaluate a certain configuration or data!
 pipeline_object()
 ```
