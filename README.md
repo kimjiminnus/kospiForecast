@@ -127,7 +127,7 @@ best_trial, best_params = get_optimal_hyperparams(
                               model_type="encoder",
                               data_params=DataParameters(),
                               optimiser=optim.AdamW,
-                              n_trials=20    # No. of combinations of hyperparams to try out
+                              n_trials=20,    # No. of combinations of hyperparams to try out
                               plot_loss=False
                               )
 ```                     
