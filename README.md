@@ -59,14 +59,29 @@ This Decoder-only model is used strictly for zero-shot forecasting as a baseline
 ## Trainer Class
 - Accepts DataPipeline, model, TrainingArguments and optimiser as input parameters
 - Can be used for training only, evaluation only, or both.
-- plot_loss=True can be input to return a loss graph (plot_loss=False by default)
 ```python
-trainer.train_evaluate(plot_loss=True) # Returns a single plot with train and validation loss curves
+# Returns only a list of training loss for every epoch
+trainer.train(plot_loss=False)
+# Returns a plot with both train and validation loss curves, along with respective list of losses
+trainer.train_evaluate(plot_loss=True) 
 ```
 ## Pipeline Class
-- Pipeline covers instantiation of both DataPipeline and Trainer classes
-- Users can input pre-existing models for fine-tuning, or strings i.e "encoder" for on-the-spot instantiation and training
-- pipeline_object() is all that's required to train and evaluate a certain configuration or data!
+- Pipeline covers instantiation of both DataPipeline and Trainer classes and combined the process. For example:
+```python
+pipeline_object = Pipeline(
+           task="train",
+           model="encoder"
+           model_config=ModelConfig(),
+           train_args=TrainingArguments(),
+           optimiser=optimiser,
+           plot_loss=True
+              )
+```
+- Users can input pre-existing models for fine-tuning instead of inputting a string
+```python
+# This line is all you need to train or evaluate on a certain configuration!
+pipeline_object()
+```
 
 ## HyperparamTuner Class
 - HyperparamTuner provides Optuna the lists of possible hyperpameter values to automate hyperparameter optimisation.
