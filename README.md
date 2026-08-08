@@ -40,7 +40,9 @@ The DataPipeline class covers the following data preparation workflow in order w
  - Returning train and validation dataloaders
 
 ## Model Creation
-'''create_model("encoder", ModelConfigs)'''
+'''
+create_model("encoder", ModelConfigs)
+'''
 
 :  Creates, loads, and returns a Transformer Encoder model </br>
 create_model("timesfm, ModelConfigs=None):  Does the same for a ZeroShotTimesFM model
