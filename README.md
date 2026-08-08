@@ -7,7 +7,10 @@ A PyTorch project investigating the forecasting performance of a custom Transfor
 ## Overview
 The project provides a reusable, modular framework for training and evaluating Transformer-based models on multivariate financial time-series data.
 
-###DataParameters, ModelConfigs and Training Arguments data classes for simplified parameter inputs.
+## Configurations
+-DataParameters
+-ModelConfigs 
+-Training Arguments data classes for simplified parameter inputs.
 
 The DataPipeline covers market data retrieval, temporal alignment, log return transformation, data preprocessing, feature scaling, instantiation of a custom TimeSeriesDataset class and returning them in the form of train and val dataloaders.
 
