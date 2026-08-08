@@ -10,17 +10,40 @@ The project provides a reusable, modular framework for training and evaluating T
 ## Configurations
 Dataclasses for simpler parameter inputs.
 
-DataParameters
-- Target stock index
-- Variable stock indices
-- Start & end date of retrieval
+```python
+class DataParameters:
+    target:str = 'target/^KS11'     # Format of Target Index: target/ticker
+    var1:str = "krw/USDKRW=X".      # Format of Variable Indices: desired_name/ticker
+    var2:str = "dxy/DX-Y.NYB"
+    var3:str = "sox/^SOX"
 
-ModelConfigs 
-- Model dimensions
-- Feed-forward network dimension
-- Maximum sequence window
-- Number of heads, encoder layers
-- Dropout 
+    start_date:str = "2023-06-01".  # Start date of data retrieval
+    end_date:str = "2026-07-01".    # End date of data retrieval
+
+    test_split:float = 0.3
+
+    inference:bool = False
+
+
+class ModelConfig:
+    d_model:int = 8       # Feature Dimensions
+    dim_ffn:int = 16.     # Feed-forward network dimension
+    max_window:int = 5    # Maximum sequence window
+    num_heads:int = 2.    # For Multi-head Attention
+    num_layers:int = 3.   # Number of Encoder Layers
+    num_vars:int = 3      # Fixed due to high correlation of market indices
+    dropout:float = 0.2   # Prevents overfitting on small dataset
+
+
+class TrainingArguments:
+    epochs: int = 50
+    train_batch_size: int = 8
+    eval_batch_size: int = 8
+    learning_rate: float = 1e-2  
+    weight_decay: float = 1e-4
+    criterion :str = 'mse'       # Alternatively: 'mae', 'huber'
+```
+
 
 Training Arguments 
 - Epochs
