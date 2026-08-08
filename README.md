@@ -54,7 +54,7 @@ The DataPipeline class covers the following data preparation workflow in order w
  - Instantiation of custom TimeSeries Dataset using data from previous preprocessing steps
  - Train-test split
  - Standard feature scaling using training data
- - Returning train and validation dataloaders
+ - Returning train and validation DataLoaders
 ```python
 # Instantiate a DataPipeline
 data_pipeline = DataPipeline(
@@ -63,7 +63,7 @@ data_pipeline = DataPipeline(
                       model_config=ModelConfig()
                       )
 
-# Return Dataloaders
+# Return DataLoaders
 train_loader, val_loader = data_pipeline.run()       
 ```
 
@@ -72,13 +72,13 @@ train_loader, val_loader = data_pipeline.run()
 # Creates, loads, and returns a Transformer Encoder model
 create_model("encoder", model_config)
 
-# Does the same for a TimesFm 2.5 model
+# Does the same for a TimesFM 2.5 model
 create_model("timesfm", model_config=None)
 ```
 
 ## Custom Transformer Encoder
 - Converts stock data into numerical feature embeddings.
-- Applies positional encoding to provide temporal information from previous trading days to the model.
+- Applies positional encoding to provide temporal position information to the model.
 ```python
 # input_tensor.shape == (batch_size, max_window, num_vars)
 ```
@@ -121,7 +121,7 @@ pipeline_object()
 ```
 
 ## HyperparamTuner Class
-- HyperparamTuner provides Optuna lists of possible hyperpameter values to automate hyperparameter optimisation.
+- HyperparamTuner provides Optuna lists of possible hyperparameter values to automate hyperparameter optimisation.
 - Instantiates Pipeline within its own method, allowing users to experiment multiple Pipeline objects easily
 
 ## get_optimal_hyperparams() function
