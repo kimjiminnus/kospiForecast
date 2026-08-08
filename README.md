@@ -35,20 +35,22 @@ The DataPipeline class covers the following data preparation workflow in order w
  - Temporal alignment
  - Log-return transformation
  - Instantiation of custom TimeSeries Dataset using data from previous preprocessing steps
- - Standard feature scaling
  - Train-test split
+ - Standard feature scaling
  - Returning train and validation dataloaders
 
 ## Model Creation
-create_model("encoder", ModelConfigs):  Creates , loads, and returns a Transformer Encoder model </br>
+'''create_model("encoder", ModelConfigs)'''
+
+:  Creates, loads, and returns a Transformer Encoder model </br>
 create_model("timesfm, ModelConfigs=None):  Does the same for a ZeroShotTimesFM model
 
 ## Custom Transformer Encoder
 - Converts stock data into numerical feature embeddings. i.e, If k market indexes are used to predict a target index, shape of input tensor will be (batch_size, max_window, k)
-- Applies positional encoding to learn patterns of noises from previous trading days.
+- Applies positional encoding to provide temporal information from previous trading days to the model.
 
 ## Google's TimesFM 2.5 Model
-This model is used strictly for zero-shot forecasting to get an unbiased evaluation of the performance of a custom Transformer Encoder-only model against a pretrained Decoder-only model.
+This Decoder-only model is used strictly for zero-shot forecasting as a baseline model for comparison with the performance of a custom Transformer Encoder-only model
 
 ## Trainer Class
 - Accepts DataPipeline, model, TrainingArguments and optimiser as input parameters
