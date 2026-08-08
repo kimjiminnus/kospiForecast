@@ -38,14 +38,25 @@ The DataPipeline class covers the following data preparation workflow in order w
  - Train-test split
  - Standard feature scaling
  - Returning train and validation dataloaders
+```python
+# Instantiate a DataPipeline
+data_pipeline = DataPipeline(
+                      data_params=DataParameters(),
+                      train_args=TrainingArguments(),
+                      model_config=ModelConfig()
+
+# Return Dataloaders
+train_loader, val_loader = data_pipeline.run()       
+)
+```
 
 ## Model Creation
 ```python
 # Creates, loads, and returns a Transformer Encoder model
-create_model("encoder", model_configs)
+create_model("encoder", model_config)
 
 # Does the same for a TimesFm 2.5 model
-create_model("timesfm", model_configs=None)
+create_model("timesfm", model_config=None)
 ```
 
 ## Custom Transformer Encoder
@@ -58,7 +69,7 @@ This Decoder-only model is used strictly for zero-shot forecasting as a baseline
 ## Trainer Class
 - Trainer simplifies tasks such as training only, evaluation only, or both at the same time.
 ```python
-# Instantiate
+# Instantiate Trainer
 trainer = Trainer(
             data_pipeline=DataPipeline(),
             model=model,
@@ -86,7 +97,7 @@ pipeline_object = Pipeline(
 ```
 - Users can input pre-existing models for fine-tuning instead of string inputs
 ```python
-# This line is all you need to train or evaluate on a certain configuration!
+# This line is all that's required to train or evaluate a certain configuration or data!
 pipeline_object()
 ```
 
