@@ -1,6 +1,6 @@
 class DataPreprocessor:
-    def __init__(self, input_data:InputData):
-        self.retriever = DataRetriever(input_data)
+    def __init__(self, data_params:DataParameters):
+        self.retriever = DataRetriever(data_params)
         self.scaler = StandardScaler()
 
     def retrieve_data(self):
