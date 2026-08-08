@@ -75,7 +75,10 @@ create_model("timesfm", model_config=None)
 ```
 
 ## Custom Transformer Encoder
-- Converts stock data into numerical feature embeddings. i.e, If k market indexes are used to predict a target index, shape of input tensor will be (batch_size, max_window, k)
+- Converts stock data into numerical feature embeddings.
+```python
+# input_tensor.shape == (batch_size, max_window, num_vars)
+```
 - Applies positional encoding to provide temporal information from previous trading days to the model.
 
 ## Google's TimesFM 2.5 Model
