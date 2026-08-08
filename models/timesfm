@@ -1,6 +1,6 @@
 class ZeroShotTimesFM(nn.Module):
     def __init__(self):
-        super(nn.Module).__init__()
+        super().__init__()
         self.model = TimesFm2_5ModelForPrediction.from_pretrained("google/timesfm-2.5-200m-transformers")
 
     def forward(self, x:Tensor):
