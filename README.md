@@ -4,4 +4,4 @@ A PyTorch project investigating the forecasting performance of a custom Transfor
 (By someone forced into a long-term investor by the KOSPI😔)
 
 
-
+## Overview
