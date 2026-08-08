@@ -7,6 +7,41 @@ A PyTorch project investigating the forecasting performance of a custom Transfor
 ## Overview
 The project provides a reusable, modular framework for training and evaluating Transformer-based models on multivariate financial time-series data.
 
+## Project Structure
+```text
+.
+├── src/
+│   ├── configs/
+│   │   ├── data_params.py
+│   │   ├── model_config.py
+│   │   └── train_args.py
+│   │
+│   ├── data/
+│   │   ├── pipeline.py
+│   │   ├── preprocessor.py
+│   │   ├── retriever.py
+│   │   └── time_series_dataset.py
+│   │
+│   ├── hyperparam/
+│   │   ├── optimisation.py
+│   │   └── tuner.py
+│   │
+│   ├── models/
+│   │   ├── create_model.py
+│   │   ├── input_embeddings.py
+│   │   ├── timesfm.py
+│   │   └── transformer_encoder.py
+│   │
+│   ├── training/
+│   │   ├── train_evaluation_loops.py
+│   │   └── trainer.py
+│   │
+│   ├── pipeline.py
+│   └── visualisation.py
+│
+└── README.md
+```
+
 ## Configurations
 Dataclasses for simpler parameter inputs.
 
