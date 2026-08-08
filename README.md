@@ -13,12 +13,12 @@ Dataclasses for simpler parameter inputs.
 ```python
 class DataParameters:
     target:str = 'target/^KS11'     # Format of Target Index: target/ticker
-    var1:str = "krw/USDKRW=X".      # Format of Variable Indices: desired_name/ticker
+    var1:str = "krw/USDKRW=X"       # Format of Variable Indices: desired_name/ticker
     var2:str = "dxy/DX-Y.NYB"
     var3:str = "sox/^SOX"
 
-    start_date:str = "2023-06-01".  # Start date of data retrieval
-    end_date:str = "2026-07-01".    # End date of data retrieval
+    start_date:str = "2023-06-01"   # Start date of data retrieval
+    end_date:str = "2026-07-01"     # End date of data retrieval
 
     test_split:float = 0.3
 
@@ -27,10 +27,10 @@ class DataParameters:
 
 class ModelConfig:
     d_model:int = 8       # Feature Dimensions
-    dim_ffn:int = 16.     # Feed-forward network dimension
+    dim_ffn:int = 16      # Feed-forward network dimension
     max_window:int = 5    # Maximum sequence window
     num_heads:int = 2     # For Multi-head Attention
-    num_layers:int = 3.   # Number of Encoder Layers
+    num_layers:int = 3    # Number of Encoder Layers
     num_vars:int = 3      # Fixed due to high correlation of market indices
     dropout:float = 0.2   # Prevents overfitting on small dataset
 
@@ -103,10 +103,10 @@ trainer.train_evaluate(plot_loss=True)
 ```python
 pipeline_object = Pipeline(
            task="train",
-           model="encoder"
+           model="encoder",
            model_config=ModelConfig(),
            train_args=TrainingArguments(),
-           optimiser=optim.SGD
+           optimiser=optim.SGD,
            plot_loss=True
            )
 ```
@@ -128,7 +128,7 @@ best_trial, best_params = get_optimal_hyperparams(
                               model_type="encoder",
                               data_params=DataParameters(),
                               optimiser=optim.AdamW,
-                              n_trials=20.    # No. of combinations of hyperparams to try out
+                              n_trials=20    # No. of combinations of hyperparams to try out
                               plot_loss=False
                               )
 ```                     
