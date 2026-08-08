@@ -60,8 +60,9 @@ This Decoder-only model is used strictly for zero-shot forecasting as a baseline
 - Accepts DataPipeline, model, TrainingArguments and optimiser as input parameters
 - Can be used for training only, evaluation only, or both.
 - plot_loss=True can be input to return a loss graph (plot_loss=False by default)
-- i.e. trainer.train_evaluate(plot_loss=True) returns a single plot with train and validation loss curves
-
+```python
+trainer.train_evaluate(plot_loss=True) # Returns a single plot with train and validation loss curves
+```
 ## Pipeline Class
 - Pipeline covers instantiation of both DataPipeline and Trainer classes
 - Users can input pre-existing models for fine-tuning, or strings i.e "encoder" for on-the-spot instantiation and training
