@@ -44,6 +44,7 @@ data_pipeline = DataPipeline(
                       data_params=DataParameters(),
                       train_args=TrainingArguments(),
                       model_config=ModelConfig()
+                      )
 
 # Return Dataloaders
 train_loader, val_loader = data_pipeline.run()       
