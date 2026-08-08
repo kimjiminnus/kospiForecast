@@ -23,8 +23,8 @@ class DataParameters:
     test_split:float = 0.3
 
     inference:bool = False
-```
-```python
+
+
 class ModelConfig:
     d_model:int = 8       # Feature Dimensions
     dim_ffn:int = 16.     # Feed-forward network dimension
@@ -33,8 +33,8 @@ class ModelConfig:
     num_layers:int = 3.   # Number of Encoder Layers
     num_vars:int = 3      # Fixed due to high correlation of market indices
     dropout:float = 0.2   # Prevents overfitting on small dataset
-```
-```python
+
+
 class TrainingArguments:
     epochs: int = 50
     train_batch_size: int = 8
