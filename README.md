@@ -44,14 +44,6 @@ class TrainingArguments:
     criterion :str = 'mse'       # Alternatively: 'mae', 'huber'
 ```
 
-
-Training Arguments 
-- Epochs
-- Train & Eval batch size
-- Learning Rate
-- Weight Decay
-- Criterion (e.g. MSE, MAE)
-
 ## DataPipeline
 The DataPipeline class covers the following data preparation workflow in order with a simple .run()
  - Market data retrieval
