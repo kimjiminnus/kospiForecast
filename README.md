@@ -82,7 +82,7 @@ create_model("timesfm", model_config=None)
 This Decoder-only model is used strictly for zero-shot forecasting as a baseline model for comparison with the performance of a custom Transformer Encoder-only model
 
 ## Trainer Class
-- Trainer simplifies tasks such as training only, evaluation only, or both at the same time.
+- Trainer contains methods for simplified training, evaluation, and combined training/evaluation workflows
 ```python
 # Instantiate Trainer
 trainer = Trainer(
