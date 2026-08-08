@@ -17,8 +17,8 @@ DataParameters
 
 ModelConfigs 
 - Model dimensions
-- Feedforward Network dimensions
-- Max Window (seq_length for LLMs)
+- Feed-forward network dimension
+- Maximum sequence window
 - Number of heads, encoder layers
 - Dropout 
 
