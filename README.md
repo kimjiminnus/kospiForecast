@@ -30,7 +30,7 @@ Training Arguments
 - Criterion (e.g. MSE, MAE)
 
 ## DataPipeline
-The DataPipeline class covers the following data preparation workflow in order
+The DataPipeline class covers the following data preparation workflow in order with a simple .run()
  - Market data retrieval
  - Temporal alignment
  - Log-return transformation
@@ -40,19 +40,36 @@ The DataPipeline class covers the following data preparation workflow in order
  - Returning train and validation dataloaders
 
 ## Model Creation
-create_model("encoder", ModelConfigs) creates a Transformer Encoder model </br>
-create_model("timesfm, ModelConfigs)
+create_model("encoder", ModelConfigs) creates , loads, and returns a Transformer Encoder model </br>
+create_model("timesfm, ModelConfigs=None) does the same for a ZeroShotTimesFM model
+
+## Custom Transformer Encoder
+- Converts stock data into numerical feature embeddings. i.e, If k market indexes are used to predict a target index, shape of input tensor will be (batch_size, max_window, k)
+- Applies positional encoding to learn patterns of noises from previous trading days.
+
+## Google's TimesFM 2.5 Model
+This model is used strictly for zero-shot forecasting to get an unbiased evaluation of the performance of a custom Transformer Encoder-only model against a pretrained Decoder-only model.
+
+## Trainer Class
+- Accepts DataPipeline, model, TrainingArguments and optimiser as input parameters
+- Can be used for training only, evaluation only, or both.
+- plot_loss=True can be input to return a loss graph (plot_loss=False by default)
+- i.e. trainer.train_evaluate(plot_loss=True) returns a single plot with train and validation loss curves
+
+## Pipeline Class
+- Pipeline covers instantiation of both DataPipeline and Trainer classes
+- Users can input pre-existing models for fine-tuning, or strings i.e "encoder" for on-the-spot instantiation and training
+- pipeline_object() is all that's required to train and evaluate a certain configuration or data!
+
+## HyperparamTuner Class
+- HyperparamTuner provides Optuna the lists of possible hyperpameter values to automate hyperparameter optimisation.
+- Instantiates Pipeline within its own method, allowing users to experiment multiple Pipeline objects easily
+
+## get_optimal_hyperparams() function
+- Performs data preprocessing, model creation & training and hyperparameter optimisation all with one line of code😎😎
+- i.e. best_trial, best_params = get_optimal_hyperparams(epochs, other parameters)
 
 
-The create_model is called with parameters ModelConfigs and a string i.e "encoder", "timesfm" that instantiates, loads and returns models accordingly.
-
-The Custom Transformer Encoder Model applies numerical feature embeddings and sinusoidal positional encodings onto input matrices before processing, while the TimesFM 2.5 model is used strictly for zero-shot forecasting.
-
-The Trainer Class accepts a DataPipeline, model, TrainingArguments and an optimiser. It can be called for different purposes such as training only, evaluation only, and both. plot_loss() can be used to plot losses when a method is called.
-
-The Pipeline Class covers the whole process and instantiates the DataPipeline and the Trainer. It can accept both pre-existing models for fine-tuning purposes, or strings i.e "encoder" for on-the-spot instantiation and training.
-
-HyperparamTuner provides lists of possible hyperparameter values for Optuna to automate hyperparameter optimisation. While Pipeline can only be used to train and evaluate on a certain configuration, HyperParamTuner instantiates Pipeline concurrently, therefore allowing users to complete data preprocessing, training and obtaining optimal hyperparameters with a single get_optimal_hyperparams() function.
 
 
 
