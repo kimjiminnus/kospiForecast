@@ -63,7 +63,7 @@ trainer = Trainer(
             data_pipeline=DataPipeline(),
             model=model,
             train_args=TrainingArguments,
-            optimiser=optimiser
+            optimiser=optim.Adam
             )
 
 # Example: Train only, returns a list of training loss for every epoch
@@ -80,7 +80,7 @@ pipeline_object = Pipeline(
            model="encoder"
            model_config=ModelConfig(),
            train_args=TrainingArguments(),
-           optimiser=optimiser,
+           optimiser=optim.SGD
            plot_loss=True
            )
 ```
@@ -91,12 +91,21 @@ pipeline_object()
 ```
 
 ## HyperparamTuner Class
-- HyperparamTuner provides Optuna the lists of possible hyperpameter values to automate hyperparameter optimisation.
+- HyperparamTuner provides Optuna lists of possible hyperpameter values to automate hyperparameter optimisation.
 - Instantiates Pipeline within its own method, allowing users to experiment multiple Pipeline objects easily
 
 ## get_optimal_hyperparams() function
 - Performs data preprocessing, model creation & training and hyperparameter optimisation all with one line of code😎😎
-- i.e. best_trial, best_params = get_optimal_hyperparams(epochs, other parameters)
+```python
+best_trial, best_params = get_optimal_hyperparams(
+                              epochs=10,
+                              model_type="encoder",
+                              data_params=DataParameters(),
+                              optimiser=optim.AdamW,
+                              n_trials=20.    # No. of combinations of hyperparams to try out
+                              plot_loss=False
+                              )
+```                     
 
 
 
