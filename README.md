@@ -41,11 +41,11 @@ The DataPipeline class covers the following data preparation workflow in order w
 
 ## Model Creation
 ```python
-create_model("encoder", ModelConfigs)
+create_model("encoder", model_configs)
 ```
 Creates, loads, and returns a Transformer Encoder model
 ```python
-create_model("timesfm, ModelConfigs=None)
+create_model("timesfm", model_configs=None)
 ```
 Does the same for a ZeroShotTimesFM model
 
