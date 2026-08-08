@@ -56,13 +56,20 @@ create_model("timesfm", model_configs=None)
 This Decoder-only model is used strictly for zero-shot forecasting as a baseline model for comparison with the performance of a custom Transformer Encoder-only model
 
 ## Trainer Class
-- Accepts DataPipeline, model, TrainingArguments and optimiser as input parameters
-- Can be used for training only, evaluation only, or both.
+- Trainer simplifies tasks such as training only, evaluation only, or both at the same time.
 ```python
-# Returns only a list of training loss for every epoch
+# Instantiate
+trainer = Trainer(
+            data_pipeline=DataPipeline(),
+            model=model,
+            train_args=TrainingArguments,
+            optimiser=optimiser
+            )
+
+# Example: Train only, returns a list of training loss for every epoch
 trainer.train(plot_loss=False)
 
-# Returns a plot with both train and validation loss curves, along with respective list of losses
+# Example: Train and evaluate, returns a plot with both loss curves, and their respective list of losses
 trainer.train_evaluate(plot_loss=True) 
 ```
 ## Pipeline Class
