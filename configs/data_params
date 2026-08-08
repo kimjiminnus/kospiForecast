@@ -1,5 +1,5 @@
 @dataclass
-class InputData:
+class DataParameters:
     #DEFAULT EXAMPLES
     target:str = 'target/^KS11'
     var1:str = "krw/USDKRW=X"
