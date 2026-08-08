@@ -11,6 +11,8 @@ The project provides a reusable, modular framework for training and evaluating T
 Dataclasses for simpler parameter inputs.
 
 ```python
+# DEFAULT VALUES
+
 class DataParameters:
     target:str = 'target/^KS11'     # Format of Target Index: target/ticker
     var1:str = "krw/USDKRW=X"       # Format of Variable Indices: desired_name/ticker
