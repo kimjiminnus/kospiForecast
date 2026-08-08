@@ -8,13 +8,41 @@ A PyTorch project investigating the forecasting performance of a custom Transfor
 The project provides a reusable, modular framework for training and evaluating Transformer-based models on multivariate financial time-series data.
 
 ## Configurations
-- DataParameters
-- ModelConfigs 
-- Training Arguments data classes for simplified parameter inputs.
+Dataclasses for simpler parameter inputs.
 
+DataParameters
+- Target stock index
+- Variable stock indices
+- Start & end date of retrieval
 
+ModelConfigs 
+- Model dimensions
+- Feedforward Network dimensions
+- Max Window (seq_length for LLMs)
+- Number of heads, encoder layers
+- Dropout 
 
-The DataPipeline covers market data retrieval, temporal alignment, log return transformation, data preprocessing, feature scaling, instantiation of a custom TimeSeriesDataset class and returning them in the form of train and val dataloaders.
+Training Arguments 
+- Epochs
+- Train & Eval batch size
+- Learning Rate
+- Weight Decay
+- Criterion (e.g. MSE, MAE)
+
+## DataPipeline
+The DataPipeline class covers the following data preparation workflow in order
+ - Market data retrieval
+ - Temporal alignment
+ - Log-return transformation
+ - Instantiation of custom TimeSeries Dataset using data from previous preprocessing steps
+ - Standard feature scaling
+ - Train-test split
+ - Returning train and validation dataloaders
+
+## Model Creation
+create_model("encoder", ModelConfigs) creates a Transformer Encoder model </br>
+create_model("timesfm, ModelConfigs)
+
 
 The create_model is called with parameters ModelConfigs and a string i.e "encoder", "timesfm" that instantiates, loads and returns models accordingly.
 
