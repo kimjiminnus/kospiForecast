@@ -41,13 +41,14 @@ The DataPipeline class covers the following data preparation workflow in order w
 
 ## Model Creation
 ```python
+Creates, loads, and returns a Transformer Encoder model
 create_model("encoder", model_configs)
 ```
-Creates, loads, and returns a Transformer Encoder model
+
+Does the same for a ZeroShotTimesFM model
 ```python
 create_model("timesfm", model_configs=None)
 ```
-Does the same for a ZeroShotTimesFM model
 
 ## Custom Transformer Encoder
 - Converts stock data into numerical feature embeddings. i.e, If k market indexes are used to predict a target index, shape of input tensor will be (batch_size, max_window, k)
@@ -62,6 +63,7 @@ This Decoder-only model is used strictly for zero-shot forecasting as a baseline
 ```python
 # Returns only a list of training loss for every epoch
 trainer.train(plot_loss=False)
+
 # Returns a plot with both train and validation loss curves, along with respective list of losses
 trainer.train_evaluate(plot_loss=True) 
 ```
