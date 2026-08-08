@@ -1,7 +1,7 @@
 class DataPipeline:
-    def __init__(self, input_data:InputData, train_args:TrainingArguments, model_config:ModelConfig):
-        self.preprocessor = DataPreprocessor(input_data)
-        self.test_split = input_data.test_split
+    def __init__(self, data_params:DataParameters, train_args:TrainingArguments, model_config:ModelConfig):
+        self.preprocessor = DataPreprocessor(data_params)
+        self.test_split = data_params.test_split
         self.train_args = train_args
         self.model_config = model_config
 
