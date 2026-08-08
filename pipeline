@@ -1,16 +1,27 @@
 class Pipeline:
-    def __init__(self, task, df, plot_loss):
+    def __init__(self, task:str, model, input_data, model_config, train_args, optimiser, plot_loss=False):
         # DEFAULT CONFIGURATIONS
         self.task = task
-        self.model_config = ModelConfig()
-        self.train_args = TrainingArguments()
-        self.df = df
-        self.optimiser = optim.Adam
 
-        self.trainer = Trainer(df=self.df,
-                               model_config=self.model_config,
-                               train_args=self.train_args,
-                               optimiser=self.optimiser)
+        self.input_data = input_data
+        self.model_config = model_config
+        self.train_args = train_args
+
+        if type(model) == str:
+            self.model = create_model(model, self.model_config)
+        else:
+            self.model = model
+
+        self.optimiser = optimiser
+
+        self.trainer = Trainer(
+                    data_pipeline=DataPipeline(self.input_data,
+                                               self.train_args,
+                                               self.model_config),
+                    model=self.model,
+                    train_args=self.train_args,
+                    optimiser=self.optimiser,)
+
         self.plot_loss = plot_loss
 
 
