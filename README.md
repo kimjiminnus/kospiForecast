@@ -51,7 +51,7 @@ The DataPipeline class covers the following data preparation workflow in order w
  - Log-return transformation
  - Instantiation of custom TimeSeries Dataset using data from previous preprocessing steps
  - Train-test split
- - Standard feature scaling
+ - Standard feature scaling using training data
  - Returning train and validation dataloaders
 ```python
 # Instantiate a DataPipeline
