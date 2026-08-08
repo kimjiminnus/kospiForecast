@@ -1,6 +1,7 @@
+#DEFAULT CONFIGS
+
 @dataclass
 class DataParameters:
-    #DEFAULT EXAMPLES
     target:str = 'target/^KS11'
     var1:str = "krw/USDKRW=X"
     var2:str = "dxy/DX-Y.NYB"
