@@ -1,0 +1,42 @@
+class HyperparamTuner:
+    def __init__(self, epochs:int, model_type:str, data_params:DataParameters, optimiser, plot_loss=False):
+
+        self.epochs = epochs
+        self.data_params = data_params
+        self.optimiser = optimiser
+        self.model_type = model_type
+        self.plot_loss = plot_loss
+
+    def objective(self,trial):
+
+        model_config = ModelConfig(
+            d_model = trial.suggest_categorical("d_model", [8, 16, 32, 64]),
+            dim_ffn = trial.suggest_categorical("dim_ffn", [16, 32, 64, 128]),
+            max_window=trial.suggest_categorical("max_window", [2, 4, 6, 8, 10]),
+            num_heads=trial.suggest_categorical("num_heads", [2, 4]),
+            num_layers=trial.suggest_categorical("num_layers", [1, 2, 3, 4]),
+            dropout=trial.suggest_categorical("dropout", [0.0, 0.1, 0.2, 0.3]),
+            num_vars=3
+            )
+          
+        train_args = TrainingArguments(
+            train_batch_size=trial.suggest_categorical("train_batch_size", [2, 4, 8, 16, 32, 64]),
+            learning_rate=trial.suggest_float('learning_rate', 1e-4, 1e-2, log=True),
+            weight_decay=trial.suggest_float("weight_decay", 1e-6, 1e-2, log=True),
+            epochs=self.epochs,
+            eval_batch_size=32,
+            criterion='mse'
+            )
+
+        pipeline = Pipeline(task='train_evaluate',
+                            model=create_model(self.model_type,
+                                               model_config=model_config),
+                            data_params=self.data_params,
+                            model_config=model_config,
+                            train_args = train_args,
+                            optimiser = self.optimiser,
+                            plot_loss = self.plot_loss)
+
+        train_loss, val_loss = pipeline()
+
+        return val_loss[-1]
