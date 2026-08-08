@@ -1,3 +1,6 @@
+### IN PROGRESS: REMOVE HARD-CODED VARIABLES ###
+
+
 class HyperparamTuner:
     def __init__(self, epochs:int, model_type:str, data_params:DataParameters, optimiser, plot_loss=False):
 
