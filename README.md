@@ -40,8 +40,8 @@ The DataPipeline class covers the following data preparation workflow in order w
  - Returning train and validation dataloaders
 
 ## Model Creation
-create_model("encoder", ModelConfigs) creates , loads, and returns a Transformer Encoder model </br>
-create_model("timesfm, ModelConfigs=None) does the same for a ZeroShotTimesFM model
+create_model("encoder", ModelConfigs):  Creates , loads, and returns a Transformer Encoder model </br>
+create_model("timesfm, ModelConfigs=None):  Does the same for a ZeroShotTimesFM model
 
 ## Custom Transformer Encoder
 - Converts stock data into numerical feature embeddings. i.e, If k market indexes are used to predict a target index, shape of input tensor will be (batch_size, max_window, k)
