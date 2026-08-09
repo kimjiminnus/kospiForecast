@@ -160,7 +160,7 @@ pipeline_object()
 - Instantiates Pipeline within its own method, allowing users to experiment multiple Pipeline objects easily
 
 ## get_optimal_hyperparams() function
-- Performs data preprocessing, model creation, model training and hyperparameter optimisation all with one line of code😎
+- Performs data preprocessing, model creation, model training and hyperparameter optimisation all with one line of code
 ```python
 best_trial, best_params = get_optimal_hyperparams(
                               epochs=10,
