@@ -2,7 +2,7 @@
 
 @dataclass
 class DataParameters:
-    target:str = 'target/^KS11'
+    target:str = "target/^KS11"
     var1:str = "krw/USDKRW=X"
     var2:str = "dxy/DX-Y.NYB"
     var3:str = "sox/^SOX"
