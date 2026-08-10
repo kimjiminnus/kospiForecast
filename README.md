@@ -11,11 +11,6 @@ The project provides a reusable, modular framework for training and evaluating T
 ```text
 .
 ├── src/
-│   ├── configs/
-│   │   ├── data_params.py
-│   │   ├── model_config.py
-│   │   └── train_args.py
-│   │
 │   ├── data/
 │   │   ├── pipeline.py
 │   │   ├── preprocessor.py
@@ -36,6 +31,7 @@ The project provides a reusable, modular framework for training and evaluating T
 │   │   ├── train_evaluation_loops.py
 │   │   └── trainer.py
 │   │
+│   ├── configs.py
 │   ├── pipeline.py
 │   └── visualisation.py
 │
