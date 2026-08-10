@@ -24,3 +24,13 @@ class ModelConfig:
     num_layers:int = 3
     num_vars:int = 3
     dropout:float = 0.2
+
+
+@dataclass
+class TrainingArguments:
+    epochs: int = 50
+    train_batch_size: int = 8
+    eval_batch_size: int = 8
+    learning_rate: float = 1e-2
+    weight_decay: float = 1e-4
+    criterion :str = 'mse'
