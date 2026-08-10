@@ -45,7 +45,7 @@ Dataclasses for simpler parameter inputs.
 # DEFAULT VALUES
 
 class DataParameters:
-    target:str = 'target/^KS11'     # Format of Target Index: target/ticker
+    target:str = "target/^KS11"     # Format of Target Index: target/ticker
     var1:str = "krw/USDKRW=X"       # Format of Variable Indices: desired_name/ticker
     var2:str = "dxy/DX-Y.NYB"
     var3:str = "sox/^SOX"
