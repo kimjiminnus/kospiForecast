@@ -1,0 +1,9 @@
+torch
+numpy
+pandas
+scikit-learn
+yfinance
+transformers
+huggingface-hub
+optuna
+matplotlib
