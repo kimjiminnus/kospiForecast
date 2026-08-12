@@ -82,7 +82,7 @@ The DataPipeline class covers the following data preparation workflow in order w
  - Market data retrieval
  - Temporal alignment
  - Log-return transformation
- - Instantiation of custom TimeSeries Dataset using data from previous preprocessing steps
+ - Instantiation of custom TimeSeriesDataset using data from previous preprocessing steps
  - Train-test split
  - Standard feature scaling using training data
  - Returning train and validation DataLoaders
