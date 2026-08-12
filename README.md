@@ -5,7 +5,7 @@ A PyTorch project investigating the forecasting performance of a custom Transfor
 
 
 ## Overview
-The project provides a reusable, modular framework for training and evaluating Transformer-based models on multivariate financial time-series data.
+The project provides a reusable, modular framework for configuring, training and evaluating Transformer-based models against Zero-shot forecasting of a TimesFM 2.5 model on multivariate financial time-series data.
 
 ## Project Structure
 ```text
