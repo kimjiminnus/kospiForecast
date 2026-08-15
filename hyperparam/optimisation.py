@@ -1,3 +1,8 @@
+from src.configs import DataParameters
+from src.hyperparam.tuner import HyperparamTuner
+import optuna
+
+
 def get_optimal_hyperparams(epochs:int,
                             model_type:str,
                             data_params:DataParameters,
