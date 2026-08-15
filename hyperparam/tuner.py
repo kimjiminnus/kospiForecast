@@ -1,5 +1,9 @@
 ### IN PROGRESS: REMOVE HARD-CODED VARIABLES ###
 
+from src.configs import DataParameters, ModelConfig, TrainingArguments
+from src.models.create_model import create_model
+from src.pipeline import Pipeline
+
 
 class HyperparamTuner:
     def __init__(self, epochs:int, model_type:str, data_params:DataParameters, optimiser, plot_loss=False):
