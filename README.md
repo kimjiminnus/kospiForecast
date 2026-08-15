@@ -1,11 +1,11 @@
-# Transformer Encoder vs TimesFM 2.5 for Multivariate Financial Time-Series Forecasting
-A PyTorch project investigating the forecasting performance of a custom Transformer Encoder-only architecture against Google's TimesFM 2.5 Decoder-only model used as a zero-shot baseline.
+# Custom Transformer Decoder vs TimesFM 2.5 for Multivariate Financial Time-Series Forecasting
+This project seeks to evaluate the forecasting performance of a custom Transformer Decoder model trained on domain-specific data against Google's pre-trained TimesFM 2.5 Decoder-only foundation model used as a zero-shot baseline.
 
 (By someone forced into a long-term investor by the KOSPI😔)
 
 
 ## Overview
-The project provides a reusable, modular framework for configuring, training and evaluating Transformer-based models against Zero-shot forecasting of a TimesFM 2.5 model on multivariate financial time-series data.
+The project provides a reusable, modular framework for configuring, training and evaluating Transformer-based models inspired by Hugging Face APIs.
 
 ## Project Structure
 ```text
@@ -23,9 +23,9 @@ The project provides a reusable, modular framework for configuring, training and
 │   │
 │   ├── models/
 │   │   ├── create_model.py
-│   │   ├── input_embeddings.py
-│   │   ├── timesfm.py
-│   │   └── transformer_encoder.py
+│   │   ├── custom_decoder.py
+│   │   ├── input_embeddings.py 
+│   │   └── timesfm.py
 │   │
 │   ├── training/
 │   │   ├── train_evaluation_loops.py
@@ -100,22 +100,23 @@ train_loader, val_loader = data_pipeline.run()
 
 ## Model Creation
 ```python
-# Creates, loads, and returns a Transformer Encoder model
-create_model("encoder", model_config)
+# Creates, loads, and returns a custom Transformer Decoder model
+create_model("decoder", model_config)
 
 # Does the same for a TimesFM 2.5 model
 create_model("timesfm", model_config=None)
 ```
 
-## Custom Transformer Encoder
+## Custom Transformer Decoder
 - Converts stock data into numerical feature embeddings.
 - Applies positional encoding to provide temporal position information to the model.
+- Utilises masked self-attention for autoregressive forecasting
 ```python
 # input_tensor.shape == (batch_size, max_window, num_vars)
 ```
 
 ## Google's TimesFM 2.5 Model
-This Decoder-only model is used strictly for zero-shot forecasting as a baseline model for comparison with the performance of a custom Transformer Encoder-only model
+This time-series foundation model is used strictly for zero-shot forecasting as a baseline model for comparison with the performance of a custom Transformer Decoder-only model
 
 ## Trainer Class
 - Trainer contains methods for simplified training, evaluation, and combined training/evaluation workflows
@@ -140,7 +141,7 @@ trainer.train_evaluate(plot_loss=True)
 ```python
 pipeline_object = Pipeline(
            task="train",
-           model="encoder",
+           model="decoder",
            model_config=ModelConfig(),
            train_args=TrainingArguments(),
            optimiser=optim.SGD,
@@ -160,7 +161,7 @@ pipeline_object()
 ```python
 best_trial, best_params = get_optimal_hyperparams(
                               epochs=10,
-                              model_type="encoder",
+                              model_type="decoder",
                               data_params=DataParameters(),
                               optimiser=optim.AdamW,
                               n_trials=20,    # No. of combinations of hyperparams to try out
