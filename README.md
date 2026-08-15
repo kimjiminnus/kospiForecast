@@ -19,6 +19,9 @@ As originally intended to predict the Opening of the Korea Composite Stock Price
 │   │   ├── retriever.py
 │   │   └── time_series_dataset.py
 │   │
+│   ├── evaluation/
+│   │   └── notes.py
+│   │
 │   ├── hyperparam/
 │   │   ├── optimisation.py
 │   │   └── tuner.py
