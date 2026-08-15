@@ -1,3 +1,8 @@
+from src.configs import ModelConfig
+from src.models.input_embeddings import InputEmbedding
+import torch.nn as nn
+
+
 class Decoder(nn.Module):
     def __init__(self, config:ModelConfig):
         super(Decoder, self).__init__()
