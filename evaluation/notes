@@ -1,1 +1,5 @@
+Evaluation is currently delayed due to a shortage of computer memory.
 
+Evaluation will be done using
+    1. Classification: Number of correct predictions of the DIRECTION of index opening value
+    2. Regression: MSE, MAE, Huber Loss
