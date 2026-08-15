@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+
+
 def plot_losses(train_losses, val_losses):
     plt.figure(figsize=(10, 5))
 
