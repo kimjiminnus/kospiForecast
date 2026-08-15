@@ -1,3 +1,8 @@
+from src.visualisation import plot_losses
+import torch
+import torch.nn as nn
+
+
 def train_loop(model, train_loader, criterion, optimiser, device):
     model.train()
     train_loss = 0.0
