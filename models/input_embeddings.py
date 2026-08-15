@@ -1,3 +1,9 @@
+import torch
+import torch.nn as nn
+from torch import Tensor
+import math
+
+
 class VectorEmbedding(nn.Module):
     def __init__(self, num_vars, emb_size):
         super(VectorEmbedding, self).__init__()
