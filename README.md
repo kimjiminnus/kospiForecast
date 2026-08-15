@@ -7,6 +7,8 @@ This project seeks to evaluate the forecasting performance of a custom Transform
 ## Overview
 The project provides a reusable, modular framework for configuring, training and evaluating Transformer-based models inspired by Hugging Face APIs.
 
+As originally intended to predict the Opening of the Korea Composite Stock Price Index (KOSPI) using the KRW Open, US Dollar Index Close and the Philadelphia Semiconductor Index Close as variables, the default values in below configurations have been obtained via hyperparameter optimisation for above stated purpose and can be modified.
+
 ## Project Structure
 ```text
 .
