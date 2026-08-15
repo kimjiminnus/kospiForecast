@@ -1,4 +1,5 @@
 #DEFAULT CONFIGS
+from dataclasses import dataclass
 
 @dataclass
 class DataParameters:
