@@ -1,4 +1,4 @@
-# Custom Transformer Decoder vs TimesFM 2.5 for Multivariate Financial Time-Series Forecasting
+# Custom Transformer Decoder vs TimesFM 2.5 foundation model for Multivariate Financial Time-Series Forecasting
 This project seeks to evaluate the forecasting performance of a custom Transformer Decoder model trained on domain-specific data against Google's pre-trained TimesFM 2.5 Decoder-only foundation model used as a zero-shot baseline.
 
 (By someone forced into a long-term investor by the KOSPI😔)
