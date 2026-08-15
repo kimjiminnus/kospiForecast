@@ -1,6 +1,6 @@
-class Encoder(nn.Module):
+class Decoder(nn.Module):
     def __init__(self, config:ModelConfig):
-        super(Encoder, self).__init__()
+        super(Decoder, self).__init__()
         self.config = config
         self.encoder_layer = nn.TransformerEncoderLayer(
                 d_model=config.d_model,
