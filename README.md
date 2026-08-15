@@ -115,7 +115,7 @@ create_model("timesfm", model_config=None)
 ## Custom Transformer Decoder
 - Converts stock data into numerical feature embeddings.
 - Applies positional encoding to provide temporal position information to the model.
-- Utilises masked self-attention for autoregressive forecasting
+- Utilises masked self-attention for forecasting in every window length
 ```python
 # input_tensor.shape == (batch_size, max_window, num_vars)
 ```
