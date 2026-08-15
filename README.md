@@ -117,6 +117,9 @@ create_model("timesfm", model_config=None)
 - Applies positional encoding to provide temporal position information to the model.
 - Utilises masked self-attention for forecasting in every window length
 ```python
+# Instantiate Decoder
+decoder = Decoder(config=ModelConfig())
+
 # input_tensor.shape == (batch_size, max_window, num_vars)
 ```
 
