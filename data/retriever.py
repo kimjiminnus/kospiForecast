@@ -1,3 +1,8 @@
+from src.configs import DataParameters
+import yfinance as yf
+import pandas as pd
+
+
 class DataRetriever:
     def __init__(self, data_params:DataParameters):
 
