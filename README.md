@@ -20,7 +20,7 @@ As originally intended to predict the Opening of the Korea Composite Stock Price
 │   │   └── time_series_dataset.py
 │   │
 │   ├── evaluation/
-│   │   └── notes.py
+│   │   └── notes
 │   │
 │   ├── hyperparam/
 │   │   ├── optimisation.py
